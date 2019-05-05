@@ -20,7 +20,7 @@ export class XorShiftRng extends Rng {
     this.w = w | 0;
   }
 
-  next(): number {
+  nextInt(): number {
     const x = this.x,
       t = x ^ (x << 11);
 

@@ -4,12 +4,11 @@ import { XorShiftRng } from "../lib";
 tape("XorShiftRng", (assert: tape.Test) => {
   const rng = new XorShiftRng();
 
-  assert.equal(rng.next(), 619799055);
+  assert.equal(rng.nextInt(), 619799055);
+  assert.equal(rng.nextInt(), 1298398820);
 
-  const bytes: number[] = [];
-  bytes.length = 4;
-  rng.fill_bytes(bytes);
-  assert.deepEqual(bytes, [1298398820, 1025450731, 248863884, 1587258947]);
+  assert.isEquivalent(rng.next(), 0.47751270769048143);
+  assert.isEquivalent(rng.next(), 0.11588627664180765);
 
   assert.end();
 });
