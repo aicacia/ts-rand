@@ -7,8 +7,8 @@ tape("XorShiftRng", (assert: tape.Test) => {
   assert.equal(rng.nextInt(), 619799055);
   assert.equal(rng.nextInt(), 1298398820);
 
-  assert.isEquivalent(rng.next(), 0.47751270769048143);
-  assert.isEquivalent(rng.next(), 0.11588627664180765);
+  assert.isEquivalent(rng.nextFloat(), 0.47751270769048143);
+  assert.isEquivalent(rng.nextFloat(), 0.11588627664180765);
 
   assert.end();
 });

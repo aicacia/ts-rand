@@ -7,8 +7,8 @@ tape("ParkMillerRng", (assert: tape.Test) => {
   assert.equal(rng.nextInt(), 2072078316);
   assert.equal(rng.nextInt(), 94002388);
 
-  assert.isEquivalent(rng.next(), 0.9796612770201923);
-  assert.isEquivalent(rng.next(), 0.2294810210491908);
+  assert.isEquivalent(rng.nextFloat(), 0.9796612770201923);
+  assert.isEquivalent(rng.nextFloat(), 0.2294810210491908);
 
   assert.end();
 });
