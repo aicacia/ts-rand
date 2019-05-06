@@ -1,3 +1,4 @@
+import { MAX_INT } from "./constants";
 import { Rng } from "./Rng";
 
 export class ParkMillerRng extends Rng {
@@ -10,7 +11,7 @@ export class ParkMillerRng extends Rng {
   }
 
   nextInt(): number {
-    this.seed = Math.imul(48271, this.seed) | 0 % 2147483647;
-    return this.seed & 2147483647;
+    this.seed = Math.imul(48271, this.seed) | 0 % MAX_INT;
+    return this.seed & MAX_INT;
   }
 }
