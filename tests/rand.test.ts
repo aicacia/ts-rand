@@ -13,5 +13,13 @@ tape("rand", (assert: tape.Test) => {
       0.2294810210491908
     ]
   );
+
+  assert.deepEqual(DEFAULT_RNG.fillBytes(new Uint8Array([0, 0, 0, 0])), [
+    35,
+    161,
+    92,
+    236
+  ]);
+
   assert.end();
 });
