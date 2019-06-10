@@ -1,7 +1,7 @@
 import { IIterator, Iterator, Option, some } from "@stembord/core";
 import { MAX_INT } from "./constants";
 
-type ByteArray = Uint8Array | number[];
+export type ByteArray = Uint8Array | number[];
 
 export abstract class Rng implements IIterator<number> {
   abstract nextInt(): number;
@@ -11,9 +11,18 @@ export abstract class Rng implements IIterator<number> {
   }
 
   fillBytes(bytes: ByteArray): ByteArray {
-    for (let i = 0, il = bytes.length / 4; i < il; i++) {
-      fillByte(bytes, i, this.nextInt());
+    const tmpBytes = new Uint8Array(4);
+
+    for (let i = 0, il = bytes.length; i < il; i++) {
+      const index = i % 4;
+
+      if (index === 0) {
+        getBytes(tmpBytes, this.nextInt());
+      }
+
+      bytes[i] = tmpBytes[index];
     }
+
     return bytes;
   }
 
@@ -26,9 +35,9 @@ export abstract class Rng implements IIterator<number> {
   }
 }
 
-function fillByte(array: ByteArray, index: number, num: number) {
-  array[index] = (num & 0xff000000) >> 24;
-  array[index + 1] = (num & 0x00ff0000) >> 16;
-  array[index + 2] = (num & 0x0000ff00) >> 8;
-  array[index + 3] = num & 0x000000ff;
+function getBytes(bytes: ByteArray, num: number) {
+  bytes[0] = (num & 0xff000000) >> 24;
+  bytes[1] = (num & 0x00ff0000) >> 16;
+  bytes[2] = (num & 0x0000ff00) >> 8;
+  bytes[3] = num & 0x000000ff;
 }
