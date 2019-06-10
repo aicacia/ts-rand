@@ -1,7 +1,7 @@
 import { ParkMillerRng } from "./ParkMillerRng";
-import { Rng } from "./Rng";
+import { ByteArray, Rng } from "./Rng";
 import { XorShiftRng } from "./XorShiftRng";
-export { Rng };
+export { ByteArray, Rng };
 export { ParkMillerRng };
 export { XorShiftRng };
 export { MAX_INT } from "./constants";

@@ -9,8 +9,13 @@ var Rng = /** @class */ (function () {
         return this.nextInt() / constants_1.MAX_INT;
     };
     Rng.prototype.fillBytes = function (bytes) {
-        for (var i = 0, il = bytes.length / 4; i < il; i++) {
-            fillByte(bytes, i, this.nextInt());
+        var tmpBytes = new Uint8Array(4);
+        for (var i = 0, il = bytes.length; i < il; i++) {
+            var index = i % 4;
+            if (index === 0) {
+                getBytes(tmpBytes, this.nextInt());
+            }
+            bytes[i] = tmpBytes[index];
         }
         return bytes;
     };
@@ -23,9 +28,9 @@ var Rng = /** @class */ (function () {
     return Rng;
 }());
 exports.Rng = Rng;
-function fillByte(array, index, num) {
-    array[index] = (num & 0xff000000) >> 24;
-    array[index + 1] = (num & 0x00ff0000) >> 16;
-    array[index + 2] = (num & 0x0000ff00) >> 8;
-    array[index + 3] = num & 0x000000ff;
+function getBytes(bytes, num) {
+    bytes[0] = (num & 0xff000000) >> 24;
+    bytes[1] = (num & 0x00ff0000) >> 16;
+    bytes[2] = (num & 0x0000ff00) >> 8;
+    bytes[3] = num & 0x000000ff;
 }
