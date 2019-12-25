@@ -1,4 +1,4 @@
-import { IIterator, Iterator, Option, some } from "@stembord/core";
+import { IIterator, Iterator, Option, some } from "@aicacia/core";
 import { MAX_INT } from "./constants";
 
 export type ByteArray = Uint8Array | number[];

@@ -1,4 +1,4 @@
-import { Iterator } from "@stembord/core";
+import { Iterator } from "@aicacia/core";
 import { ParkMillerRng } from "./ParkMillerRng";
 import { ByteArray, Rng } from "./Rng";
 import { XorShiftRng } from "./XorShiftRng";
@@ -11,7 +11,16 @@ export { MAX_INT } from "./constants";
 
 export const PARK_MILLER_RNG = new ParkMillerRng();
 export const X_OR_SHIFT_RNG = new XorShiftRng();
-export let DEFAULT_RNG: Rng = PARK_MILLER_RNG;
+
+let DEFAULT_RNG: Rng = PARK_MILLER_RNG;
+
+export function setDefaultRng(rng: Rng) {
+  DEFAULT_RNG = rng;
+}
+
+export function getDefaultRng() {
+  return DEFAULT_RNG;
+}
 
 export function nextInt(): number {
   return DEFAULT_RNG.nextInt();

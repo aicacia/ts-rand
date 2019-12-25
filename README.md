@@ -1,3 +1,3 @@
 # ts-rand
 
-stembord rand utils
+aicacia rand utils

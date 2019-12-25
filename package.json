@@ -1,10 +1,10 @@
 {
-  "name": "@stembord/rand",
-  "version": "0.1.2",
-  "description": "stembord rand utils",
+  "name": "@aicacia/rand",
+  "version": "0.1.0",
+  "description": "aicacia rand utils",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/stembord/libs/ts-rand.git"
+    "url": "https://gitlab.com/aicacia/libs/ts-rand.git"
   },
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
@@ -41,7 +41,7 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "@stembord/core": "^0.1.3"
+    "@aicacia/core": "^0.1.1"
   },
   "nyc": {
     "include": [

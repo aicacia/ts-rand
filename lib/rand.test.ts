@@ -1,5 +1,23 @@
 import * as tape from "tape";
-import { fillBytes, iter, nextFloat, nextInt, random } from ".";
+import {
+  fillBytes,
+  getDefaultRng,
+  iter,
+  nextFloat,
+  nextInt,
+  PARK_MILLER_RNG,
+  random,
+  setDefaultRng,
+  X_OR_SHIFT_RNG
+} from ".";
+
+tape("nextInt", (assert: tape.Test) => {
+  assert.equal(getDefaultRng(), PARK_MILLER_RNG);
+  setDefaultRng(X_OR_SHIFT_RNG);
+  assert.equal(getDefaultRng(), X_OR_SHIFT_RNG);
+  setDefaultRng(PARK_MILLER_RNG); // set it back for other tests
+  assert.end();
+});
 
 tape("nextInt", (assert: tape.Test) => {
   assert.equal(nextInt(), 2072078316);
