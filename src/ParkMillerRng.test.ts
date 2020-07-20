@@ -13,7 +13,7 @@ tape("ParkMillerRng defaults", (assert: tape.Test) => {
   assert.end();
 });
 
-tape("ParkMillerRng", (assert: tape.Test) => {
+tape("ParkMillerRng with seed", (assert: tape.Test) => {
   const rng = new ParkMillerRng(100000000);
 
   assert.equal(rng.nextInt(), 1704242944);

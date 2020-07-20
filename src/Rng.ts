@@ -3,6 +3,8 @@ import { MAX_INT } from "./constants";
 
 export type ByteArray = Uint8Array | number[];
 
+const TMP_BYTES = new Uint8Array(4);
+
 export abstract class Rng implements IIterator<number> {
   abstract nextInt(): number;
 
@@ -11,7 +13,7 @@ export abstract class Rng implements IIterator<number> {
   }
 
   fillBytes(bytes: ByteArray): ByteArray {
-    const tmpBytes = new Uint8Array(4);
+    const tmpBytes = TMP_BYTES;
 
     for (let i = 0, il = bytes.length; i < il; i++) {
       const index = i % 4;
@@ -35,10 +37,10 @@ export abstract class Rng implements IIterator<number> {
   }
 }
 
-const getBytes = (bytes: ByteArray, integer: number): ByteArray => {
+function getBytes(bytes: ByteArray, integer: number): ByteArray {
   bytes[0] = (integer & 0xff000000) >> 24;
   bytes[1] = (integer & 0x00ff0000) >> 16;
   bytes[2] = (integer & 0x0000ff00) >> 8;
   bytes[3] = integer & 0x000000ff;
   return bytes;
-};
+}

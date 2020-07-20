@@ -13,7 +13,7 @@ tape("XorShiftRng defaults", (assert: tape.Test) => {
   assert.end();
 });
 
-tape("XorShiftRng", (assert: tape.Test) => {
+tape("XorShiftRng with seed", (assert: tape.Test) => {
   const rng = new XorShiftRng(100000000, 200000000, 300000000, 400000000);
 
   assert.equal(rng.nextInt(), 1115724315);
