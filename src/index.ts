@@ -30,6 +30,14 @@ export function nextFloat(): number {
   return DEFAULT_RNG.nextFloat();
 }
 
+export function nextFloatInRange(min: number, max: number): number {
+  return DEFAULT_RNG.nextFloatInRange(min, max);
+}
+
+export function nextIntInRange(min: number, max: number): number {
+  return DEFAULT_RNG.nextIntInRange(min, max);
+}
+
 export function fillBytes(bytes: ByteArray): ByteArray {
   return DEFAULT_RNG.fillBytes(bytes);
 }

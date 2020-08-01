@@ -12,6 +12,14 @@ export abstract class Rng implements IIterator<number> {
     return this.nextInt() / MAX_INT;
   }
 
+  nextFloatInRange(min: number, max: number) {
+    return this.nextFloat() * (max - min) + min;
+  }
+
+  nextIntInRange(min: number, max: number) {
+    return Math.round(this.nextFloatInRange(min, max));
+  }
+
   fillBytes(bytes: ByteArray): ByteArray {
     const tmpBytes = TMP_BYTES;
 

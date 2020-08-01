@@ -8,7 +8,9 @@ import {
   PARK_MILLER_RNG,
   random,
   setDefaultRng,
-  X_OR_SHIFT_RNG
+  X_OR_SHIFT_RNG,
+  nextFloatInRange,
+  nextIntInRange,
 } from ".";
 
 tape("nextInt", (assert: tape.Test) => {
@@ -35,28 +37,56 @@ tape("random", (assert: tape.Test) => {
 });
 
 tape("iter", (assert: tape.Test) => {
+  assert.deepEqual(iter().take(4).toArray(), [
+    0.2294810210491908,
+    0.27836190735844984,
+    0.8076238431071974,
+    0.8105124741841632,
+  ]);
+  assert.end();
+});
+
+tape("fillBytes", (assert: tape.Test) => {
   assert.deepEqual(
-    iter()
-      .take(4)
-      .toArray(),
+    fillBytes(new Uint8Array([0, 0, 0, 0, 0, 0])),
+    new Uint8Array([31, 178, 29, 84, 2, 8])
+  );
+  assert.end();
+});
+
+tape("nextFloatInRange", (assert: tape.Test) => {
+  assert.deepEqual(
     [
-      0.2294810210491908,
-      0.27836190735844984,
-      0.8076238431071974,
-      0.8105124741841632
+      nextFloatInRange(-5, 5),
+      nextFloatInRange(-5, 5),
+      nextFloatInRange(-5, 5),
+      nextFloatInRange(-5, 5),
+      nextFloatInRange(-5, 5),
+      nextFloatInRange(-5, 5),
+    ],
+    [
+      -3.7758412020168457,
+      -3.630690071094171,
+      2.959547437708614,
+      0.31418672078949683,
+      -3.892920221617874,
+      4.84795740332825,
     ]
   );
   assert.end();
 });
 
-tape("fillBytes", (assert: tape.Test) => {
-  assert.deepEqual(fillBytes(new Uint8Array([0, 0, 0, 0, 0, 0])), [
-    31,
-    178,
-    29,
-    84,
-    2,
-    8
-  ]);
+tape("nextIntInRange", (assert: tape.Test) => {
+  assert.deepEqual(
+    [
+      nextIntInRange(-5, 5),
+      nextIntInRange(-5, 5),
+      nextIntInRange(-5, 5),
+      nextIntInRange(-5, 5),
+      nextIntInRange(-5, 5),
+      nextIntInRange(-5, 5),
+    ],
+    [-4, -5, 1, -3, 4, 0]
+  );
   assert.end();
 });
