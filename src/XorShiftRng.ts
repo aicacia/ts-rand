@@ -1,23 +1,30 @@
 import { Rng } from "./Rng";
+import { ParkMillerRng } from "./ParkMillerRng";
 
 export class XorShiftRng extends Rng {
-  x: number = 0x193a6754;
-  y: number = 0xa8a7d469;
-  z: number = 0x97830e05;
-  w: number = 0x113ba7bb;
+  x: number;
+  y: number;
+  z: number;
+  w: number;
 
-  constructor(
-    x: number = 0x193a6754,
-    y: number = 0xa8a7d469,
-    z: number = 0x97830e05,
-    w: number = 0x113ba7bb
-  ) {
+  constructor(x = 0x193a6754, y = 0xa8a7d469, z = 0x97830e05, w = 0x113ba7bb) {
     super();
 
     this.x = x | 0;
     this.y = y | 0;
     this.z = z | 0;
     this.w = w | 0;
+  }
+
+  static fromSeed(seed: number) {
+    const rng = new ParkMillerRng(seed);
+
+    return new XorShiftRng(
+      rng.nextInt(),
+      rng.nextInt(),
+      rng.nextInt(),
+      rng.nextInt()
+    );
   }
 
   nextInt(): number {

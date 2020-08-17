@@ -24,3 +24,15 @@ tape("XorShiftRng with seed", (assert: tape.Test) => {
 
   assert.end();
 });
+
+tape("XorShiftRng with fromSeed", (assert: tape.Test) => {
+  const rng = XorShiftRng.fromSeed(100000000);
+
+  assert.equal(rng.nextInt(), 664658361);
+  assert.equal(rng.nextInt(), 954514827);
+
+  assert.isEquivalent(rng.nextFloat(), 0.5293325598022587);
+  assert.isEquivalent(rng.nextFloat(), 0.327552259586543);
+
+  assert.end();
+});

@@ -11,6 +11,7 @@ import {
   X_OR_SHIFT_RNG,
   nextFloatInRange,
   nextIntInRange,
+  suffle,
 } from ".";
 
 tape("nextInt", (assert: tape.Test) => {
@@ -87,6 +88,26 @@ tape("nextIntInRange", (assert: tape.Test) => {
       nextIntInRange(-5, 5),
     ],
     [-4, -5, 1, -3, 4, 0]
+  );
+  assert.end();
+});
+
+tape("suffle", (assert: tape.Test) => {
+  assert.deepEqual(
+    [
+      suffle([0, 1, 2, 3, 4]),
+      suffle([0, 1, 2, 3, 4]),
+      suffle([0, 1, 2, 3, 4]),
+      suffle([0, 1, 2, 3, 4]),
+      suffle([0, 1, 2, 3, 4]),
+    ],
+    [
+      [0, 1, 2, 3, 4],
+      [1, 3, 2, 4, 0],
+      [0, 3, 1, 4, 2],
+      [0, 1, 2, 3, 4],
+      [3, 2, 4, 1, 0],
+    ]
   );
   assert.end();
 });

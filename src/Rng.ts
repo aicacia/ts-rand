@@ -20,6 +20,23 @@ export abstract class Rng implements IIterator<number> {
     return Math.round(this.nextFloatInRange(min, max));
   }
 
+  sortFunction() {
+    return () => {
+      const x = this.nextFloat();
+
+      if (x < 0.33334) {
+        return -1;
+      } else if (x < 0.66667) {
+        return 0;
+      } else {
+        return 1;
+      }
+    };
+  }
+  suffle<T>(array: T[]) {
+    return array.sort(this.sortFunction());
+  }
+
   fillBytes(bytes: ByteArray): ByteArray {
     const tmpBytes = TMP_BYTES;
 

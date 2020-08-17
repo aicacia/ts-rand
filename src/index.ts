@@ -38,6 +38,14 @@ export function nextIntInRange(min: number, max: number): number {
   return DEFAULT_RNG.nextIntInRange(min, max);
 }
 
+export function sortFunction(): () => number {
+  return DEFAULT_RNG.sortFunction();
+}
+
+export function suffle<T>(array: T[]): T[] {
+  return DEFAULT_RNG.suffle(array);
+}
+
 export function fillBytes(bytes: ByteArray): ByteArray {
   return DEFAULT_RNG.fillBytes(bytes);
 }
