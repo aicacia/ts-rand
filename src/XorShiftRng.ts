@@ -16,7 +16,7 @@ export class XorShiftRng extends Rng {
     this.w = w | 0;
   }
 
-  static fromSeed(seed: number) {
+  static fromSeed(seed?: number) {
     const rng = new ParkMillerRng(seed);
 
     return new XorShiftRng(
