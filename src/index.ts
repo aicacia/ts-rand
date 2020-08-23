@@ -12,7 +12,7 @@ export { MAX_INT } from "./constants";
 export const PARK_MILLER_RNG = new ParkMillerRng();
 export const X_OR_SHIFT_RNG = new XorShiftRng();
 
-let DEFAULT_RNG: Rng = PARK_MILLER_RNG;
+let DEFAULT_RNG: Rng = X_OR_SHIFT_RNG;
 
 export function setDefaultRng(rng: Rng) {
   DEFAULT_RNG = rng;
@@ -38,12 +38,12 @@ export function nextIntInRange(min: number, max: number): number {
   return DEFAULT_RNG.nextIntInRange(min, max);
 }
 
-export function sortFunction(): () => number {
-  return DEFAULT_RNG.sortFunction();
+export function getSortFunction(): () => number {
+  return DEFAULT_RNG.getSortFunction();
 }
 
-export function suffle<T>(array: T[]): T[] {
-  return DEFAULT_RNG.suffle(array);
+export function shuffle<T>(array: T[]): T[] {
+  return DEFAULT_RNG.shuffle(array);
 }
 
 export function fillBytes(bytes: ByteArray): ByteArray {

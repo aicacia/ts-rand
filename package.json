@@ -1,6 +1,6 @@
 {
   "name": "@aicacia/rand",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "aicacia rand utils",
   "repository": {
     "type": "git",
@@ -15,7 +15,8 @@
     "test": "ts-node node_modules/.bin/tape src/**/*.test.{ts,tsx} | tap-spec",
     "coverage": "nyc --reporter=lcov --check-coverage --lines=75 --require ts-node/register tape src/**/*.test.{ts,tsx} | tap-spec; nyc report ---reporter=text",
     "clean": "rm -rf ./lib",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "simple": "parcel examples/simple/index.html "
   },
   "keywords": [
     "rand",
@@ -33,6 +34,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.5",
     "nyc": "^15.1.0",
+    "parcel-bundler": "^1.12.4",
     "prettier": "^2.0.5",
     "tap-nyc": "^1.0.3",
     "tap-spec": "^5.0.0",
