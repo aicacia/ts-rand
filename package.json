@@ -1,6 +1,6 @@
 {
   "name": "@aicacia/rand",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "aicacia rand utils",
   "repository": {
     "type": "git",
@@ -42,10 +42,10 @@
     "ts-node": "^8.10.2",
     "tslib": "^2.0.1",
     "typedoc": "^0.17.8",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.2"
   },
   "dependencies": {
-    "@aicacia/core": "^0.1.5"
+    "@aicacia/core": "^0.1.7"
   },
   "nyc": {
     "include": [
