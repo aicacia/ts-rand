@@ -1,5 +1,7 @@
 import { IIterator, Iterator, Option, some } from "@aicacia/core";
 import { MAX_INT } from "./constants";
+import { UniformFloatRng } from "./UniformFloatRng";
+import { UniformIntRng } from "./UniformIntRng";
 
 export type ByteArray = Uint8Array | number[];
 
@@ -51,7 +53,15 @@ export abstract class Rng implements IIterator<number> {
   }
 
   next(): Option<number> {
-    return some(this.nextFloat());
+    return some(this.nextInt());
+  }
+
+  uniformFloatRng(min = 0.0, max = 1.0) {
+    return new UniformFloatRng(this, min, max);
+  }
+
+  uniformIntRng(min = 0, max = 1) {
+    return new UniformIntRng(this, min, max);
   }
 }
 

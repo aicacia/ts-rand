@@ -8,6 +8,8 @@ export { ParkMillerRng };
 export { XorShiftRng };
 
 export { MAX_INT } from "./constants";
+export { UniformFloatRng } from "./UniformFloatRng";
+export { UniformIntRng } from "./UniformIntRng";
 
 export const PARK_MILLER_RNG = new ParkMillerRng();
 export const X_OR_SHIFT_RNG = new XorShiftRng();
@@ -56,4 +58,12 @@ export function iter(): Iterator<number> {
 
 export function random(): number {
   return DEFAULT_RNG.nextFloat();
+}
+
+export function uniformFloatRng(min = 0.0, max = 1.0) {
+  return DEFAULT_RNG.uniformFloatRng(min, max);
+}
+
+export function uniformIntRng(min = 0, max = 1) {
+  return DEFAULT_RNG.uniformIntRng(min, max);
 }

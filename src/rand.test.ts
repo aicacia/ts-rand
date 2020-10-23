@@ -12,6 +12,8 @@ import {
   nextFloatInRange,
   nextIntInRange,
   shuffle,
+  uniformFloatRng,
+  uniformIntRng,
 } from ".";
 
 tape("nextInt", (assert: tape.Test) => {
@@ -39,10 +41,10 @@ tape("random", (assert: tape.Test) => {
 
 tape("iter", (assert: tape.Test) => {
   assert.deepEqual(iter().take(4).toArray(), [
-    0.11588627664180765,
-    0.7391250448949286,
-    0.09649314456456022,
-    0.43425180783227635,
+    248863884,
+    1587258947,
+    207217450,
+    932548656,
   ]);
   assert.end();
 });
@@ -109,5 +111,23 @@ tape("shuffle", (assert: tape.Test) => {
       [4, 3, 2, 1, 0],
     ]
   );
+  assert.end();
+});
+
+tape("uniformFloatRng", (assert: tape.Test) => {
+  const rng = uniformFloatRng(-5.0, 5.0);
+  assert.deepEqual(rng.take(5).toArray(), [
+    2.003176504281897,
+    3.2679959937315424,
+    -2.680003837533297,
+    1.1042357078307479,
+    -0.6304716857292094,
+  ]);
+  assert.end();
+});
+
+tape("uniformIntRng", (assert: tape.Test) => {
+  const rng = uniformIntRng(-5, 5);
+  assert.deepEqual(rng.take(5).toArray(), [-5, 4, -2, 4, 1]);
   assert.end();
 });
