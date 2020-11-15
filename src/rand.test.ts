@@ -94,6 +94,24 @@ tape("nextIntInRange", (assert: tape.Test) => {
   assert.end();
 });
 
+tape("uniformFloatRng", (assert: tape.Test) => {
+  const rng = uniformFloatRng(-5.0, 5.0);
+  assert.deepEqual(rng.take(5).toArray(), [
+    4.60974760801054,
+    2.071304250076089,
+    -0.44463830787904524,
+    4.002934577410544,
+    -4.879260468240483,
+  ]);
+  assert.end();
+});
+
+tape("uniformIntRng", (assert: tape.Test) => {
+  const rng = uniformIntRng(-5, 5);
+  assert.deepEqual(rng.take(5).toArray(), [0, -5, 3, -1, -2]);
+  assert.end();
+});
+
 tape("shuffle", (assert: tape.Test) => {
   assert.deepEqual(
     [
@@ -104,30 +122,12 @@ tape("shuffle", (assert: tape.Test) => {
       shuffle([0, 1, 2, 3, 4]),
     ],
     [
-      [0, 1, 3, 4, 2],
-      [0, 3, 2, 1, 4],
-      [2, 1, 3, 4, 0],
-      [1, 3, 0, 4, 2],
-      [4, 3, 2, 1, 0],
+      [4, 2, 0, 1, 3],
+      [1, 2, 4, 0, 3],
+      [3, 1, 0, 4, 2],
+      [1, 3, 4, 0, 2],
+      [1, 2, 3, 4, 0],
     ]
   );
-  assert.end();
-});
-
-tape("uniformFloatRng", (assert: tape.Test) => {
-  const rng = uniformFloatRng(-5.0, 5.0);
-  assert.deepEqual(rng.take(5).toArray(), [
-    2.003176504281897,
-    3.2679959937315424,
-    -2.680003837533297,
-    1.1042357078307479,
-    -0.6304716857292094,
-  ]);
-  assert.end();
-});
-
-tape("uniformIntRng", (assert: tape.Test) => {
-  const rng = uniformIntRng(-5, 5);
-  assert.deepEqual(rng.take(5).toArray(), [-5, 4, -2, 4, 1]);
   assert.end();
 });

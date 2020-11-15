@@ -29,7 +29,15 @@ export abstract class Rng implements IIterator<number> {
   }
 
   shuffle<T>(array: T[]) {
-    return array.sort(this.sortFunction);
+    const length = array.length;
+    for (let i = 0; i < length; i++) {
+      const randomIndex = i + this.nextIntInRange(0, length - i - 1),
+        tmp = array[i];
+
+      array[i] = array[randomIndex];
+      array[randomIndex] = tmp;
+    }
+    return array;
   }
 
   fillBytes(bytes: ByteArray): ByteArray {
