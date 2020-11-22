@@ -48,12 +48,11 @@ function generateRand(rngCreator: () => Rng) {
   canvas.width = canvas.height = SIZE;
   canvas.style.width = canvas.style.height = `${SIZE}px`;
 
+  const uniformIntRng = rng.uniformIntRng(0, 100);
+
   for (let x = 0; x < SIZE; x += PIXEL_SIZE) {
     for (let y = 0; y < SIZE; y += PIXEL_SIZE) {
-      ctx.fillStyle = `rgb(${rng.nextIntInRange(0, 100)}%, ${rng.nextIntInRange(
-        0,
-        100
-      )}%, ${rng.nextIntInRange(0, 100)}%)`;
+      ctx.fillStyle = `rgb(${uniformIntRng.nextInt()}%, ${uniformIntRng.nextInt()}%, ${uniformIntRng.nextInt()}%)`;
       ctx.fillRect(x, y, PIXEL_SIZE, PIXEL_SIZE);
     }
   }

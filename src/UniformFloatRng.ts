@@ -14,7 +14,11 @@ export class UniformFloatRng<R extends Rng> extends Iterator<number> {
     this.max = max;
   }
 
+  nextFloat(): number {
+    return this.rng.nextFloatInRange(this.min, this.max);
+  }
+
   next(): Option<number> {
-    return some(this.rng.nextFloatInRange(this.min, this.max));
+    return some(this.nextFloat());
   }
 }

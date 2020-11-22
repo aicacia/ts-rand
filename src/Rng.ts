@@ -16,11 +16,11 @@ export abstract class Rng implements IIterator<number> {
     return this.nextInt() / MAX_INT;
   }
 
-  nextFloatInRange(min: number, max: number) {
+  nextFloatInRange(min = 0.0, max = 1.0) {
     return this.nextFloat() * (max - min) + min;
   }
 
-  nextIntInRange(min: number, max: number) {
+  nextIntInRange(min = 0, max = MAX_INT) {
     return Math.round(this.nextFloatInRange(min, max));
   }
 
@@ -68,7 +68,7 @@ export abstract class Rng implements IIterator<number> {
     return new UniformFloatRng(this, min, max);
   }
 
-  uniformIntRng(min = 0, max = 1) {
+  uniformIntRng(min = 0, max = MAX_INT) {
     return new UniformIntRng(this, min, max);
   }
 }

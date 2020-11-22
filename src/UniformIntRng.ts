@@ -1,4 +1,5 @@
 import { Iterator, Option, some } from "@aicacia/core";
+import { MAX_INT } from "./constants";
 import { Rng } from "./Rng";
 
 export class UniformIntRng<R extends Rng> extends Iterator<number> {
@@ -6,7 +7,7 @@ export class UniformIntRng<R extends Rng> extends Iterator<number> {
   private min: number;
   private max: number;
 
-  constructor(rng: R, min = 0, max = 1) {
+  constructor(rng: R, min = 0, max = MAX_INT) {
     super(rng);
 
     this.rng = rng;
@@ -14,7 +15,11 @@ export class UniformIntRng<R extends Rng> extends Iterator<number> {
     this.max = max | 0;
   }
 
+  nextInt(): number {
+    return this.rng.nextIntInRange(this.min, this.max);
+  }
+
   next(): Option<number> {
-    return some(this.rng.nextIntInRange(this.min, this.max));
+    return some(this.nextInt());
   }
 }
