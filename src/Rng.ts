@@ -3,14 +3,10 @@ import { MAX_INT } from "./constants";
 import { UniformFloatRng } from "./UniformFloatRng";
 import { UniformIntRng } from "./UniformIntRng";
 
-export type ByteArray = Uint8Array | number[];
-
 const TMP_BYTES = new Uint8Array(4);
 
 export abstract class Rng implements IIterator<number> {
   abstract nextInt(): number;
-
-  private sortFunction = () => this.nextFloat() - 0.5;
 
   nextFloat() {
     return this.nextInt() / MAX_INT;
@@ -22,10 +18,6 @@ export abstract class Rng implements IIterator<number> {
 
   nextIntInRange(min = 0, max = MAX_INT) {
     return Math.round(this.nextFloatInRange(min, max));
-  }
-
-  getSortFunction() {
-    return this.sortFunction;
   }
 
   shuffle<T>(array: T[]) {
@@ -40,7 +32,9 @@ export abstract class Rng implements IIterator<number> {
     return array;
   }
 
-  fillBytes(bytes: ByteArray): ByteArray {
+  fillBytes<B extends Uint8Array | number[] = Uint8Array | number[]>(
+    bytes: B
+  ): B {
     const tmpBytes = TMP_BYTES;
 
     for (let i = 0, il = bytes.length; i < il; i++) {
@@ -73,7 +67,10 @@ export abstract class Rng implements IIterator<number> {
   }
 }
 
-function getBytes(bytes: ByteArray, integer: number): ByteArray {
+function getBytes<B extends Uint8Array | number[] = Uint8Array | number[]>(
+  bytes: B,
+  integer: number
+): B {
   bytes[0] = (integer & 0xff000000) >> 24;
   bytes[1] = (integer & 0x00ff0000) >> 16;
   bytes[2] = (integer & 0x0000ff00) >> 8;

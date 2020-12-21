@@ -1,9 +1,9 @@
 import { Iterator } from "@aicacia/core";
 import { ParkMillerRng } from "./ParkMillerRng";
-import { ByteArray, Rng } from "./Rng";
+import { Rng } from "./Rng";
 import { XorShiftRng } from "./XorShiftRng";
 
-export { ByteArray, Rng };
+export { Rng };
 export { ParkMillerRng };
 export { XorShiftRng };
 
@@ -40,15 +40,13 @@ export function nextIntInRange(min: number, max: number): number {
   return DEFAULT_RNG.nextIntInRange(min, max);
 }
 
-export function getSortFunction(): () => number {
-  return DEFAULT_RNG.getSortFunction();
-}
-
 export function shuffle<T>(array: T[]): T[] {
   return DEFAULT_RNG.shuffle(array);
 }
 
-export function fillBytes(bytes: ByteArray): ByteArray {
+export function fillBytes<
+  B extends Uint8Array | number[] = Uint8Array | number[]
+>(bytes: B): B {
   return DEFAULT_RNG.fillBytes(bytes);
 }
 
