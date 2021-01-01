@@ -2,7 +2,7 @@ import { MAX_INT } from "./constants";
 import { Rng } from "./Rng";
 
 export class ParkMillerRng extends Rng {
-  seed: number;
+  private seed: number;
 
   constructor(seed = 0x193a6754) {
     super();

@@ -2,10 +2,10 @@ import { Rng } from "./Rng";
 import { ParkMillerRng } from "./ParkMillerRng";
 
 export class XorShiftRng extends Rng {
-  x: number;
-  y: number;
-  z: number;
-  w: number;
+  private x: number;
+  private y: number;
+  private z: number;
+  private w: number;
 
   constructor(x = 0x193a6754, y = 0xa8a7d469, z = 0x97830e05, w = 0x113ba7bb) {
     super();
