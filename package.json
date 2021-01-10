@@ -1,6 +1,6 @@
 {
   "name": "@aicacia/rand",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "aicacia rand utils",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "coverage": "nyc --reporter=lcov --check-coverage --lines=75 --require ts-node/register tape src/**/*.test.{ts,tsx} | tap-spec; nyc report ---reporter=text",
     "clean": "rm -rf ./lib",
     "lint": "eslint . --fix",
-    "simple": "parcel examples/simple/index.html",
+    "simple": "parcel serve examples/simple/index.html",
     "prettier": "prettier --ignore-path ./.eslintignore --ignore-unknown --write ."
   },
   "husky": {
@@ -40,7 +40,7 @@
     "eslint-plugin-prettier": "3",
     "husky": "4",
     "nyc": "15",
-    "parcel-bundler": "1",
+    "parcel": "^2.0.0-nightly.522",
     "prettier": "2",
     "tap-nyc": "1",
     "tap-spec": "5",

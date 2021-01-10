@@ -1,7 +1,7 @@
 import { Iterator, Option, some } from "@aicacia/core";
 import { Rng } from "./Rng";
 
-export class UniformFloatRng<R extends Rng> extends Iterator<number> {
+export class UniformFloatRng<R extends Rng = Rng> extends Iterator<number> {
   private rng: R;
   private min: number;
   private max: number;
