@@ -1,4 +1,4 @@
-import { Iterator } from "@aicacia/core";
+import { Iterator, Option } from "@aicacia/core";
 import { ParkMillerRng } from "./ParkMillerRng";
 import { Rng } from "./Rng";
 import { XorShiftRng } from "./XorShiftRng";
@@ -42,6 +42,22 @@ export function nextIntInRange(min: number, max: number): number {
 
 export function shuffle<T>(array: T[]): T[] {
   return DEFAULT_RNG.shuffle(array);
+}
+
+export function fromArray<T>(array: T[]): Option<T> {
+  return DEFAULT_RNG.fromArray(array);
+}
+
+export function keyFromObject<K extends string | number | symbol, V>(
+  object: Record<K, V>
+): Option<K> {
+  return DEFAULT_RNG.keyFromObject(object);
+}
+
+export function valueFromObject<K extends string | number | symbol, V>(
+  object: Record<K, V>
+): Option<V> {
+  return DEFAULT_RNG.valueFromObject(object);
 }
 
 export function fillBytes<

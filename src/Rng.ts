@@ -1,4 +1,4 @@
-import { IIterator, Iterator, Option, some } from "@aicacia/core";
+import { IIterator, Iterator, none, Option, some } from "@aicacia/core";
 import { MAX_INT } from "./constants";
 import { UniformFloatRng } from "./UniformFloatRng";
 import { UniformIntRng } from "./UniformIntRng";
@@ -12,10 +12,16 @@ export abstract class Rng implements IIterator<number> {
     return this.nextInt() / MAX_INT;
   }
 
+  /**
+   * returns inclusive float between min and max
+   */
   nextFloatInRange(min = 0.0, max = 1.0) {
     return this.nextFloat() * (max - min) + min;
   }
 
+  /**
+   * returns inclusive integer between min and max
+   */
   nextIntInRange(min = 0, max = MAX_INT) {
     return Math.round(this.nextFloatInRange(min, max));
   }
@@ -30,6 +36,28 @@ export abstract class Rng implements IIterator<number> {
       array[randomIndex] = tmp;
     }
     return array;
+  }
+
+  fromArray<T>(array: T[]): Option<T> {
+    const index = this.nextIntInRange(0, array.length);
+
+    if (index >= 0) {
+      return some(array[index]);
+    } else {
+      return none();
+    }
+  }
+
+  keyFromObject<K extends string | number | symbol, V>(
+    object: Record<K, V>
+  ): Option<K> {
+    return this.fromArray(Object.keys(object) as K[]);
+  }
+
+  valueFromObject<K extends string | number | symbol, V>(
+    object: Record<K, V>
+  ): Option<V> {
+    return this.fromArray(Object.values(object) as V[]);
   }
 
   fillBytes<B extends Uint8Array | number[] = Uint8Array | number[]>(

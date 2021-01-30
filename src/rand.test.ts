@@ -1,3 +1,4 @@
+import { some } from "@aicacia/core";
 import * as tape from "tape";
 import {
   fillBytes,
@@ -15,6 +16,9 @@ import {
   uniformFloatRng,
   uniformIntRng,
   XorShiftRng,
+  fromArray,
+  keyFromObject,
+  valueFromObject,
 } from ".";
 
 tape("nextInt", (assert: tape.Test) => {
@@ -140,5 +144,28 @@ tape("shuffle", (assert: tape.Test) => {
       [3, 4, 0, 2, 1],
     ]
   );
+  assert.end();
+});
+
+tape("fromArray", (assert: tape.Test) => {
+  setDefaultRng(new XorShiftRng());
+  assert.deepEqual(fromArray([0, 1, 2]), some(1));
+  assert.deepEqual(fromArray([0, 1, 2]), some(2));
+  assert.deepEqual(fromArray([0, 1, 2]), some(1));
+  assert.deepEqual(fromArray([0, 1, 2]), some(0));
+  assert.deepEqual(fromArray([0, 1, 2]), some(2));
+  assert.deepEqual(fromArray([0, 1, 2]), some(0));
+  assert.end();
+});
+
+tape("keyFromObject", (assert: tape.Test) => {
+  setDefaultRng(new XorShiftRng());
+  assert.deepEqual(keyFromObject({ a: 0, b: 1, c: 2 }), some("b"));
+  assert.end();
+});
+
+tape("valueFromObject", (assert: tape.Test) => {
+  setDefaultRng(new XorShiftRng());
+  assert.deepEqual(valueFromObject({ a: 0, b: 1, c: 2 }), some(1));
   assert.end();
 });
