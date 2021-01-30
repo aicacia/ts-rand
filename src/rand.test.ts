@@ -1,4 +1,4 @@
-import { some } from "@aicacia/core";
+import { Range, some } from "@aicacia/core";
 import * as tape from "tape";
 import {
   fillBytes,
@@ -70,21 +70,22 @@ tape("fillBytes", (assert: tape.Test) => {
 tape("nextFloatInRange", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
   assert.deepEqual(
+    new Range(0, 10)
+      .iter()
+      .map(() => nextFloatInRange(-1, 1))
+      .toArray(),
     [
-      nextFloatInRange(-5, 5),
-      nextFloatInRange(-5, 5),
-      nextFloatInRange(-5, 5),
-      nextFloatInRange(-5, 5),
-      nextFloatInRange(-5, 5),
-      nextFloatInRange(-5, 5),
-    ],
-    [
-      -2.1138357404218224,
-      1.04614066241595,
-      -0.22487292309518558,
-      -3.8411372335819234,
-      2.391250448949286,
-      -4.035068554354398,
+      -0.6341507221265467,
+      0.3138421987247848,
+      -0.06746187692855576,
+      -1,
+      0.7173751346847856,
+      -1,
+      -0.19724457650317095,
+      1,
+      -1,
+      -0.45323732772527126,
+      0.19101946972823702,
     ]
   );
   assert.end();
@@ -93,36 +94,32 @@ tape("nextFloatInRange", (assert: tape.Test) => {
 tape("nextIntInRange", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
   assert.deepEqual(
-    [
-      nextIntInRange(-5, 5),
-      nextIntInRange(-5, 5),
-      nextIntInRange(-5, 5),
-      nextIntInRange(-5, 5),
-      nextIntInRange(-5, 5),
-      nextIntInRange(-5, 5),
-    ],
-    [-2, 1, -0, -4, 2, -4]
+    new Range(0, 10)
+      .iter()
+      .map(() => nextIntInRange(-1, 1))
+      .toArray(),
+    [-1, 0, -0, -1, 1, -1, -0, 1, -1, -0, 0]
   );
   assert.end();
 });
 
 tape("uniformFloatRng", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
-  const rng = uniformFloatRng(-5.0, 5.0);
+  const rng = uniformFloatRng(-1.0, 1.0);
   assert.deepEqual(rng.take(5).toArray(), [
-    -2.1138357404218224,
-    1.04614066241595,
-    -0.22487292309518558,
-    -3.8411372335819234,
-    2.391250448949286,
+    -0.6341507221265467,
+    0.3138421987247848,
+    -0.06746187692855576,
+    -1,
+    0.7173751346847856,
   ]);
   assert.end();
 });
 
 tape("uniformIntRng", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
-  const rng = uniformIntRng(-5, 5);
-  assert.deepEqual(rng.take(5).toArray(), [-2, 1, -0, -4, 2]);
+  const rng = uniformIntRng(-1, 1);
+  assert.deepEqual(rng.take(5).toArray(), [-1, 0, -0, -1, 1]);
   assert.end();
 });
 
@@ -141,7 +138,7 @@ tape("shuffle", (assert: tape.Test) => {
       [0, 2, 4, 3, 1],
       [2, 0, 4, 3, 1],
       [0, 1, 3, 2, 4],
-      [3, 4, 0, 2, 1],
+      [3, 4, 1, 0, 2],
     ]
   );
   assert.end();
@@ -149,12 +146,11 @@ tape("shuffle", (assert: tape.Test) => {
 
 tape("fromArray", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
-  assert.deepEqual(fromArray([0, 1, 2]), some(1));
-  assert.deepEqual(fromArray([0, 1, 2]), some(2));
-  assert.deepEqual(fromArray([0, 1, 2]), some(1));
-  assert.deepEqual(fromArray([0, 1, 2]), some(0));
-  assert.deepEqual(fromArray([0, 1, 2]), some(2));
-  assert.deepEqual(fromArray([0, 1, 2]), some(0));
+  const array = new Range(0, 20).iter().toArray();
+  assert.deepEqual(
+    array.map(() => fromArray(array).unwrap()),
+    [6, 13, 10, 2, 16, 2, 9, 18, 2, 7, 12, 5, 17, 0, 20, 1, 1, 10, 7, 17, 15]
+  );
   assert.end();
 });
 
