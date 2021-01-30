@@ -40,10 +40,8 @@ export abstract class Rng implements IIterator<number> {
   }
 
   fromArray<T>(array: T[]): Option<T> {
-    const index = this.nextIntInRange(0, array.length);
-
-    if (index >= 0) {
-      return some(array[index]);
+    if (array.length) {
+      return some(array[this.nextIntInRange(0, array.length - 1)]);
     } else {
       return none();
     }

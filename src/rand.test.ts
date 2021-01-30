@@ -146,22 +146,32 @@ tape("shuffle", (assert: tape.Test) => {
 
 tape("fromArray", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
-  const array = new Range(0, 20).iter().toArray();
+  const array = new Range(0, 5).iter().toArray();
   assert.deepEqual(
-    array.map(() => fromArray(array).unwrap()),
-    [6, 13, 10, 2, 16, 2, 9, 18, 2, 7, 12, 5, 17, 0, 20, 1, 1, 10, 7, 17, 15]
+    [
+      array.map(() => fromArray(array).unwrap()),
+      array.map(() => fromArray(array).unwrap()),
+      array.map(() => fromArray(array).unwrap()),
+      array.map(() => fromArray(array).unwrap()),
+    ],
+    [
+      [1, 3, 2, 0, 4, 0],
+      [2, 5, 0, 2, 3, 1],
+      [4, 0, 5, 0, 0, 2],
+      [1, 4, 4, 5, 4, 2],
+    ]
   );
   assert.end();
 });
 
 tape("keyFromObject", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
-  assert.deepEqual(keyFromObject({ a: 0, b: 1, c: 2 }), some("b"));
+  assert.deepEqual(keyFromObject({ a: 0, b: 1, c: 2 }), some("a"));
   assert.end();
 });
 
 tape("valueFromObject", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
-  assert.deepEqual(valueFromObject({ a: 0, b: 1, c: 2 }), some(1));
+  assert.deepEqual(valueFromObject({ a: 0, b: 1, c: 2 }), some(0));
   assert.end();
 });
