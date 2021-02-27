@@ -1,18 +1,19 @@
 import { Iterator, Option } from "@aicacia/core";
+import { NativeRng } from "./NativeRng";
 import { ParkMillerRng } from "./ParkMillerRng";
 import { Rng } from "./Rng";
 import { XorShiftRng } from "./XorShiftRng";
 
-export { Rng };
-export { ParkMillerRng };
-export { XorShiftRng };
+export { NativeRng, Rng, ParkMillerRng, XorShiftRng };
 
 export { MAX_INT } from "./constants";
-export { UniformFloatRng } from "./UniformFloatRng";
-export { UniformIntRng } from "./UniformIntRng";
+export { FloatIter } from "./FloatIter";
+export { UniformFloatIter } from "./UniformFloatIter";
+export { UniformIntIter } from "./UniformIntIter";
 
 export const PARK_MILLER_RNG = new ParkMillerRng();
 export const X_OR_SHIFT_RNG = new XorShiftRng();
+export const X_NATIVE_RNG = new NativeRng();
 
 let DEFAULT_RNG: Rng = X_OR_SHIFT_RNG;
 
@@ -74,10 +75,14 @@ export function random(): number {
   return DEFAULT_RNG.nextFloat();
 }
 
-export function uniformFloatRng(min = 0.0, max = 1.0) {
-  return DEFAULT_RNG.uniformFloatRng(min, max);
+export function float() {
+  return DEFAULT_RNG.float();
 }
 
-export function uniformIntRng(min = 0, max = 1) {
-  return DEFAULT_RNG.uniformIntRng(min, max);
+export function uniformFloat(min = 0.0, max = 1.0) {
+  return DEFAULT_RNG.uniformFloat(min, max);
+}
+
+export function uniformInt(min = 0, max = 1) {
+  return DEFAULT_RNG.uniformInt(min, max);
 }

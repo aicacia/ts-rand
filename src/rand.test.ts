@@ -13,12 +13,13 @@ import {
   nextFloatInRange,
   nextIntInRange,
   shuffle,
-  uniformFloatRng,
-  uniformIntRng,
+  uniformFloat,
+  uniformInt,
   XorShiftRng,
   fromArray,
   keyFromObject,
   valueFromObject,
+  float,
 } from ".";
 
 tape("nextInt", (assert: tape.Test) => {
@@ -103,9 +104,9 @@ tape("nextIntInRange", (assert: tape.Test) => {
   assert.end();
 });
 
-tape("uniformFloatRng", (assert: tape.Test) => {
+tape("uniformFloat", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
-  const rng = uniformFloatRng(-1.0, 1.0);
+  const rng = uniformFloat(-1.0, 1.0);
   assert.deepEqual(rng.take(5).toArray(), [
     -0.6341507221265467,
     0.3138421987247848,
@@ -116,10 +117,23 @@ tape("uniformFloatRng", (assert: tape.Test) => {
   assert.end();
 });
 
-tape("uniformIntRng", (assert: tape.Test) => {
+tape("uniformInt", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
-  const rng = uniformIntRng(-1, 1);
+  const rng = uniformInt(-1, 1);
   assert.deepEqual(rng.take(5).toArray(), [-1, 0, -0, -1, 1]);
+  assert.end();
+});
+
+tape("float", (assert: tape.Test) => {
+  setDefaultRng(new XorShiftRng());
+  const rng = float();
+  assert.deepEqual(rng.take(5).toArray(), [
+    0.2886164259578178,
+    0.604614066241595,
+    0.47751270769048143,
+    0.11588627664180765,
+    0.7391250448949286,
+  ]);
   assert.end();
 });
 

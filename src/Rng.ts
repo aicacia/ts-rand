@@ -1,7 +1,8 @@
 import { IIterator, Iterator, none, Option, some } from "@aicacia/core";
 import { MAX_INT } from "./constants";
-import { UniformFloatRng } from "./UniformFloatRng";
-import { UniformIntRng } from "./UniformIntRng";
+import { FloatIter } from "./FloatIter";
+import { UniformFloatIter } from "./UniformFloatIter";
+import { UniformIntIter } from "./UniformIntIter";
 
 const TMP_BYTES = new Uint8Array(4);
 
@@ -85,12 +86,16 @@ export abstract class Rng implements IIterator<number> {
     return some(this.nextInt());
   }
 
-  uniformFloatRng(min = 0.0, max = 1.0) {
-    return new UniformFloatRng(this, min, max);
+  float() {
+    return new FloatIter(this);
   }
 
-  uniformIntRng(min = 0, max = MAX_INT) {
-    return new UniformIntRng(this, min, max);
+  uniformFloat(min = 0.0, max = 1.0) {
+    return new UniformFloatIter(this, min, max);
+  }
+
+  uniformInt(min = 0, max = MAX_INT) {
+    return new UniformIntIter(this, min, max);
   }
 }
 

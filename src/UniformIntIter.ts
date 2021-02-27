@@ -2,7 +2,7 @@ import { Iterator, Option, some } from "@aicacia/core";
 import { MAX_INT } from "./constants";
 import { Rng } from "./Rng";
 
-export class UniformIntRng<R extends Rng = Rng> extends Iterator<number> {
+export class UniformIntIter<R extends Rng = Rng> extends Iterator<number> {
   private rng: R;
   private min: number;
   private max: number;
