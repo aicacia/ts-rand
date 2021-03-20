@@ -1,4 +1,4 @@
-import { Iterator, Option } from "@aicacia/core";
+import { Iter, Option } from "@aicacia/core";
 import { NativeRng } from "./NativeRng";
 import { ParkMillerRng } from "./ParkMillerRng";
 import { Rng } from "./Rng";
@@ -13,9 +13,9 @@ export { UniformIntIter } from "./UniformIntIter";
 
 export const PARK_MILLER_RNG = new ParkMillerRng();
 export const X_OR_SHIFT_RNG = new XorShiftRng();
-export const X_NATIVE_RNG = new NativeRng();
+export const NATIVE_RNG = new NativeRng();
 
-let DEFAULT_RNG: Rng = X_OR_SHIFT_RNG;
+let DEFAULT_RNG: Rng = NATIVE_RNG;
 
 export function setDefaultRng(rng: Rng) {
   DEFAULT_RNG = rng;
@@ -67,7 +67,7 @@ export function fillBytes<
   return DEFAULT_RNG.fillBytes(bytes);
 }
 
-export function iter(): Iterator<number> {
+export function iter(): Iter<number> {
   return DEFAULT_RNG.iter();
 }
 

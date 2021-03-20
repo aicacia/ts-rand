@@ -20,10 +20,11 @@ import {
   keyFromObject,
   valueFromObject,
   float,
+  NATIVE_RNG,
 } from ".";
 
 tape("nextInt", (assert: tape.Test) => {
-  assert.equal(getDefaultRng(), X_OR_SHIFT_RNG);
+  assert.equal(getDefaultRng(), NATIVE_RNG);
   setDefaultRng(PARK_MILLER_RNG);
   assert.equal(getDefaultRng(), PARK_MILLER_RNG);
   setDefaultRng(X_OR_SHIFT_RNG);
@@ -107,7 +108,7 @@ tape("nextIntInRange", (assert: tape.Test) => {
 tape("uniformFloat", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
   const rng = uniformFloat(-1.0, 1.0);
-  assert.deepEqual(rng.take(5).toArray(), [
+  assert.deepEqual(rng.iter().take(5).toArray(), [
     -0.6341507221265467,
     0.3138421987247848,
     -0.06746187692855576,
@@ -120,14 +121,14 @@ tape("uniformFloat", (assert: tape.Test) => {
 tape("uniformInt", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
   const rng = uniformInt(-1, 1);
-  assert.deepEqual(rng.take(5).toArray(), [-1, 0, -0, -1, 1]);
+  assert.deepEqual(rng.iter().take(5).toArray(), [-1, 0, -0, -1, 1]);
   assert.end();
 });
 
 tape("float", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
   const rng = float();
-  assert.deepEqual(rng.take(5).toArray(), [
+  assert.deepEqual(rng.iter().take(5).toArray(), [
     0.2886164259578178,
     0.604614066241595,
     0.47751270769048143,

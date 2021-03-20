@@ -1,4 +1,4 @@
-import { IIterator, Iterator, none, Option, some } from "@aicacia/core";
+import { Iter, Option, some, none } from "@aicacia/core";
 import { MAX_INT } from "./constants";
 import { FloatIter } from "./FloatIter";
 import { UniformFloatIter } from "./UniformFloatIter";
@@ -6,7 +6,7 @@ import { UniformIntIter } from "./UniformIntIter";
 
 const TMP_BYTES = new Uint8Array(4);
 
-export abstract class Rng implements IIterator<number> {
+export abstract class Rng implements Iterator<number>, Iterable<number> {
   abstract nextInt(): number;
 
   nextFloat() {
@@ -78,12 +78,16 @@ export abstract class Rng implements IIterator<number> {
     return bytes;
   }
 
-  iter() {
-    return new Iterator(this);
+  [Symbol.iterator]() {
+    return this;
   }
 
-  next(): Option<number> {
-    return some(this.nextInt());
+  iter() {
+    return new Iter(this);
+  }
+
+  next(): IteratorResult<number> {
+    return { done: false, value: this.nextInt() };
   }
 
   float() {
