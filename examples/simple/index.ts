@@ -1,4 +1,4 @@
-import { Rng, ParkMillerRng, XorShiftRng } from "../../src";
+import { Rng, ParkMillerRng, XorShiftRng, NativeRng } from "../../src";
 
 const SIZE = 512,
   PIXEL_SIZE = 1,
@@ -8,6 +8,9 @@ const SIZE = 512,
     },
     function ParkMiller() {
       return new ParkMillerRng(Date.now());
+    },
+    function Native() {
+      return new NativeRng();
     },
   ];
 
@@ -48,7 +51,7 @@ function generateRand(rngCreator: () => Rng) {
   canvas.width = canvas.height = SIZE;
   canvas.style.width = canvas.style.height = `${SIZE}px`;
 
-  const uniformIntRng = rng.uniformIntRng(0, 100);
+  const uniformIntRng = rng.uniformInt(0, 100);
 
   for (let x = 0; x < SIZE; x += PIXEL_SIZE) {
     for (let y = 0; y < SIZE; y += PIXEL_SIZE) {

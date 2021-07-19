@@ -3,7 +3,8 @@ import { Rng } from "./Rng";
 
 export class UniformFloatIter<R extends Rng = Rng>
   extends Iter<number>
-  implements Iterator<number>, Iterable<number> {
+  implements Iterator<number>, Iterable<number>
+{
   private rng: R;
   private min: number;
   private max: number;

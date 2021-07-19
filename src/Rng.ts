@@ -17,8 +17,7 @@ export abstract class Rng implements Iterator<number>, Iterable<number> {
    * returns inclusive float between min and max
    */
   nextFloatInRange(min = 0.0, max = 1.0) {
-    const value = min - 0.5 + this.nextFloat() * (max + 1 - min);
-    return value > max ? max : value < min ? min : value;
+    return min + this.nextFloat() * (max - min);
   }
 
   /**
