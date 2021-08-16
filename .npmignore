@@ -1,9 +1,9 @@
-.cache
+.parcel-cache
 .github
 .nyc_output
 .vscode
 coverage
-examples
+example
 dist
 docs
 src

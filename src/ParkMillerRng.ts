@@ -10,6 +10,11 @@ export class ParkMillerRng extends Rng {
     this.seed = seed;
   }
 
+  setSeed(seed = 0x193a6754) {
+    this.seed = seed;
+    return this;
+  }
+
   nextInt(): number {
     this.seed = Math.imul(48271, this.seed) | 0 % MAX_INT;
     return this.seed & MAX_INT;

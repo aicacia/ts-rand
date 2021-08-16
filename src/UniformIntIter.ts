@@ -1,6 +1,6 @@
 import { Iter } from "@aicacia/core";
 import { MAX_INT } from "./constants";
-import { Rng } from "./Rng";
+import type { Rng } from "./Rng";
 
 export class UniformIntIter<R extends Rng = Rng>
   extends Iter<number>

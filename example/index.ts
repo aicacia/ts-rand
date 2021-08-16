@@ -1,7 +1,6 @@
-import { Rng, ParkMillerRng, XorShiftRng, NativeRng } from "../../src";
+import { Rng, ParkMillerRng, XorShiftRng, NativeRng } from "../src";
 
 const SIZE = 512,
-  PIXEL_SIZE = 1,
   rngs = [
     function XorShift() {
       return XorShiftRng.fromSeed(Date.now());
@@ -46,19 +45,26 @@ function generateRand(rngCreator: () => Rng) {
   const rng = rngCreator(),
     element = document.getElementById(rngCreator.name),
     canvas = element.getElementsByTagName("canvas")[0] as HTMLCanvasElement,
-    ctx = canvas.getContext("2d");
+    ctx = canvas.getContext("2d"),
+    width = SIZE,
+    height = SIZE,
+    uniformIntRng = rng.uniformInt(0, 256),
+    imagedata = ctx.createImageData(width, height);
 
-  canvas.width = canvas.height = SIZE;
-  canvas.style.width = canvas.style.height = `${SIZE}px`;
+  canvas.width = canvas.height = width;
+  canvas.style.width = canvas.style.height = `${width}px`;
 
-  const uniformIntRng = rng.uniformInt(0, 100);
-
-  for (let x = 0; x < SIZE; x += PIXEL_SIZE) {
-    for (let y = 0; y < SIZE; y += PIXEL_SIZE) {
-      ctx.fillStyle = `rgb(${uniformIntRng.nextInt()}%, ${uniformIntRng.nextInt()}%, ${uniformIntRng.nextInt()}%)`;
-      ctx.fillRect(x, y, PIXEL_SIZE, PIXEL_SIZE);
+  for (let x = 0; x < width; x++) {
+    for (let y = 0; y < height; y++) {
+      const pixelindex = (y * width + x) * 4;
+      imagedata.data[pixelindex] = uniformIntRng.nextInt();
+      imagedata.data[pixelindex + 1] = uniformIntRng.nextInt();
+      imagedata.data[pixelindex + 2] = uniformIntRng.nextInt();
+      imagedata.data[pixelindex + 3] = 255;
     }
   }
+
+  ctx.putImageData(imagedata, 0, 0);
 }
 
 window.addEventListener("load", onLoad);

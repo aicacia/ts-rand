@@ -1,5 +1,5 @@
 import { Iter } from "@aicacia/core";
-import { Rng } from "./Rng";
+import type { Rng } from "./Rng";
 
 export class UniformFloatIter<R extends Rng = Rng>
   extends Iter<number>
