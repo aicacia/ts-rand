@@ -1,4 +1,5 @@
-import { Range, some } from "@aicacia/core";
+import { some } from "@aicacia/core";
+import { Range } from "@aicacia/core";
 import * as tape from "tape";
 import {
   fillBytes,

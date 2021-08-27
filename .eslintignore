@@ -1,9 +1,11 @@
-.parcel-cache
+.parcel-cache/
+dist/
 .github
 .nyc_output/
 .vscode/
 coverage/
-dist/
 docs/
-lib/
+dest/
+cjs/
+esm/
 node_modules/
