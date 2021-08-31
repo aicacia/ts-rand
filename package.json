@@ -1,11 +1,12 @@
 {
   "name": "@aicacia/rand",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "aicacia rand utils",
   "repository": {
     "type": "git",
     "url": "https://github.com/aicacia/ts-rand"
   },
+  "type": "module",
   "module": "./esm/index.js",
   "main": "./cjs/index.js",
   "types": "./cjs/index.d.ts",

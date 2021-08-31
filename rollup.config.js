@@ -14,14 +14,14 @@ export default [
         dir: dirname(pkg.module),
         format: "es",
         sourcemap: true,
-        preserveModules: true,
         plugins: [terser()],
       },
     ],
     plugins: [
       esmImportToUrl({
         imports: {
-          "@aicacia/core": "https://unpkg.com/@aicacia/core@0/esm",
+          tslib: "https://unpkg.com/tslib@2/tslib.es6.js",
+          "@aicacia/core": "https://unpkg.com/@aicacia/core@0/esm/index.js",
         },
       }),
       resolve({ browser: true }),
