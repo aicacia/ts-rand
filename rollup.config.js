@@ -1,17 +1,15 @@
-import { dirname } from "path";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
-import esmImportToUrl from "rollup-plugin-esm-import-to-url";
 import { terser } from "rollup-plugin-terser";
-import pkg from "./package.json";
+import esmImportToUrl from "rollup-plugin-esm-import-to-url";
 
 export default [
   {
     input: "src/index.ts",
     output: [
       {
-        dir: dirname(pkg.module),
+        file: "browser/index.js",
         format: "es",
         sourcemap: true,
         plugins: [terser()],
@@ -21,11 +19,13 @@ export default [
       esmImportToUrl({
         imports: {
           tslib: "https://unpkg.com/tslib@2/tslib.es6.js",
-          "@aicacia/core": "https://unpkg.com/@aicacia/core@0/esm/index.js",
+          "@aicacia/core": "https://unpkg.com/@aicacia/core@0/browser/index.js",
         },
       }),
       resolve({ browser: true }),
-      commonjs(),
+      commonjs({
+        transformMixedEsModules: true,
+      }),
       typescript({
         tsconfig: "./tsconfig.esm.json",
       }),

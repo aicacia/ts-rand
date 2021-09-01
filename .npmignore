@@ -1,10 +1,9 @@
-.parcel-cache/
+parcel-cache/
 dist/
 .github/
 .nyc_output/
 .vscode/
 coverage/
-example/
 docs/
 src/
 node_modules/
@@ -13,4 +12,5 @@ node_modules/
 .eslintrc
 .gitignore
 npm-debug.log
+tsconfig.esm.json
 tsconfig.json
