@@ -16,10 +16,6 @@ export class UniformFloatIter<R extends Rng = Rng>
     this.max = max;
   }
 
-  [Symbol.iterator]() {
-    return this;
-  }
-
   iter() {
     return new Iter(this);
   }

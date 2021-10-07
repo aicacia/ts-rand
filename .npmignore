@@ -4,6 +4,7 @@ dist/
 .nyc_output/
 .vscode/
 coverage/
+example/
 docs/
 src/
 node_modules/
@@ -12,5 +13,6 @@ node_modules/
 .eslintrc
 .gitignore
 npm-debug.log
+rollup.config.js
 tsconfig.esm.json
 tsconfig.json

@@ -12,10 +12,6 @@ export class FloatIter<R extends Rng = Rng>
     this.rng = rng;
   }
 
-  [Symbol.iterator]() {
-    return this;
-  }
-
   iter() {
     return new Iter(this);
   }

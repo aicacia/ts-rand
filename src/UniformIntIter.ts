@@ -17,10 +17,6 @@ export class UniformIntIter<R extends Rng = Rng>
     this.max = max | 0;
   }
 
-  [Symbol.iterator]() {
-    return this;
-  }
-
   iter() {
     return new Iter(this);
   }

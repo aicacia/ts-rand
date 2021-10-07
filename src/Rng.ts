@@ -1,5 +1,5 @@
 import type { Option } from "@aicacia/core";
-import { Iter, some, none } from "@aicacia/core";
+import { Iter, some, none, integerToBytes } from "@aicacia/core";
 import { MAX_INT } from "./constants";
 import { FloatIter } from "./FloatIter";
 import { UniformFloatIter } from "./UniformFloatIter";
@@ -57,7 +57,7 @@ export abstract class Rng implements Iterator<number>, Iterable<number> {
   valueFromObject<K extends string | number | symbol, V>(
     object: Record<K, V>
   ): Option<V> {
-    return this.fromArray(Object.values(object) as V[]);
+    return this.fromArray(Object.values<V>(object));
   }
 
   fillBytes<B extends Uint8Array | number[] = Uint8Array | number[]>(
@@ -69,7 +69,7 @@ export abstract class Rng implements Iterator<number>, Iterable<number> {
       const index = i % 4;
 
       if (index === 0) {
-        getBytes(tmpBytes, this.nextInt());
+        integerToBytes(tmpBytes, this.nextInt());
       }
 
       bytes[i] = tmpBytes[index];
@@ -101,15 +101,4 @@ export abstract class Rng implements Iterator<number>, Iterable<number> {
   uniformInt(min = 0, max = MAX_INT) {
     return new UniformIntIter(this, min, max);
   }
-}
-
-function getBytes<B extends Uint8Array | number[] = Uint8Array | number[]>(
-  bytes: B,
-  integer: number
-): B {
-  bytes[0] = (integer & 0xff000000) >> 24;
-  bytes[1] = (integer & 0x00ff0000) >> 16;
-  bytes[2] = (integer & 0x0000ff00) >> 8;
-  bytes[3] = integer & 0x000000ff;
-  return bytes;
 }
