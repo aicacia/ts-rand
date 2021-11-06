@@ -1,6 +1,8 @@
 .github
 .nyc_output/
 .vscode/
+.parcel-cache/
+dist/
 coverage/
 docs/
 types/

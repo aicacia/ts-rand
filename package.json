@@ -1,6 +1,6 @@
 {
   "name": "@aicacia/rand",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "aicacia rand utils",
   "repository": {
     "type": "git",
@@ -60,7 +60,9 @@
     "typescript": "4"
   },
   "dependencies": {
-    "@aicacia/core": "0"
+    "@aicacia/iter": "0",
+    "@aicacia/hash": "0",
+    "@aicacia/option": "0"
   },
   "peerDependencies": {
     "tslib": "2"

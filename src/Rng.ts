@@ -1,5 +1,7 @@
-import type { Option } from "@aicacia/core";
-import { Iter, some, none, integerToBytes } from "@aicacia/core";
+import type { Option } from "@aicacia/option";
+import { Iter } from "@aicacia/iter";
+import { some, none } from "@aicacia/option";
+import { integerToBytes } from "@aicacia/hash";
 import { MAX_INT } from "./constants";
 import { FloatIter } from "./FloatIter";
 import { UniformFloatIter } from "./UniformFloatIter";

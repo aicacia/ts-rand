@@ -1,4 +1,5 @@
-import type { Iter, Option } from "@aicacia/core";
+import type { Iter } from "@aicacia/iter";
+import type { Option } from "@aicacia/option";
 import { NativeRng } from "./NativeRng";
 import { ParkMillerRng } from "./ParkMillerRng";
 import { Rng } from "./Rng";

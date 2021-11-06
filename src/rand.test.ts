@@ -1,10 +1,10 @@
-import { some } from "@aicacia/core";
-import { Range } from "@aicacia/core";
+import { iter } from "@aicacia/iter";
+import { some } from "@aicacia/option";
 import * as tape from "tape";
 import {
   fillBytes,
   getDefaultRng,
-  iter,
+  iter as randomIter,
   nextFloat,
   nextInt,
   PARK_MILLER_RNG,
@@ -53,7 +53,7 @@ tape("random", (assert: tape.Test) => {
 tape("iter", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
   assert.deepEqual(
-    iter().take(4).toArray(),
+    randomIter().take(4).toArray(),
     [619799055, 1298398820, 1025450731, 248863884]
   );
   assert.end();
@@ -71,8 +71,7 @@ tape("fillBytes", (assert: tape.Test) => {
 tape("nextFloatInRange", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
   assert.deepEqual(
-    new Range(0, 10)
-      .iter()
+    iter([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
       .map(() => nextFloatInRange(-1, 1))
       .toArray(),
     [
@@ -88,8 +87,7 @@ tape("nextFloatInRange", (assert: tape.Test) => {
 tape("nextIntInRange", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
   assert.deepEqual(
-    new Range(0, 10)
-      .iter()
+    iter([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
       .map(() => nextIntInRange(-1, 1))
       .toArray(),
     [-0, 0, -0, -1, 0, -1, -0, 1, -1, -0, 0]
@@ -153,7 +151,7 @@ tape("shuffle", (assert: tape.Test) => {
 
 tape("fromArray", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
-  const array = new Range(0, 5).iter().toArray();
+  const array = iter([0, 1, 2, 3, 4, 5]).toArray();
   assert.deepEqual(
     [
       array.map(() => fromArray(array).unwrap()),

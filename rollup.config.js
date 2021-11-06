@@ -19,7 +19,10 @@ export default [
       esmImportToUrl({
         imports: {
           tslib: "https://unpkg.com/tslib@2/tslib.es6.js",
-          "@aicacia/core": "https://unpkg.com/@aicacia/core@0/browser/index.js",
+          "@aicacia/iter": "https://unpkg.com/@aicacia/iter@0/browser/index.js",
+          "@aicacia/hash": "https://unpkg.com/@aicacia/hash@0/browser/index.js",
+          "@aicacia/option":
+            "https://unpkg.com/@aicacia/option@0/browser/index.js",
         },
       }),
       resolve({ browser: true }),

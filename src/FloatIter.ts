@@ -1,4 +1,4 @@
-import { Iter } from "@aicacia/core";
+import { Iter } from "@aicacia/iter";
 import type { Rng } from "./Rng";
 
 export class FloatIter<R extends Rng = Rng>

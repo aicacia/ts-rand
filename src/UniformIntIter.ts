@@ -1,4 +1,4 @@
-import { Iter } from "@aicacia/core";
+import { Iter } from "@aicacia/iter";
 import { MAX_INT } from "./constants";
 import type { Rng } from "./Rng";
 
