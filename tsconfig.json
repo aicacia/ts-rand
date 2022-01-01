@@ -10,7 +10,7 @@
     "declarationDir": "types",
     "strict": true,
     "downlevelIteration": true,
-    "lib": ["ESNext"]
+    "lib": ["ESNext", "DOM"]
   },
   "include": ["src"],
   "exclude": ["src/**/*.test.*"],

@@ -1,6 +1,6 @@
 {
   "name": "@aicacia/rand",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "aicacia rand utils",
   "repository": {
     "type": "git",
@@ -36,15 +36,16 @@
   "license": "(MIT OR Apache-2.0)",
   "readmeFilename": "README.md",
   "devDependencies": {
+    "@aicacia/range": "0",
     "@rollup/plugin-commonjs": "20",
     "@rollup/plugin-node-resolve": "13",
     "@rollup/plugin-typescript": "8",
     "@types/tape": "4",
-    "@typescript-eslint/eslint-plugin": "4",
-    "@typescript-eslint/parser": "4",
+    "@typescript-eslint/eslint-plugin": "5",
+    "@typescript-eslint/parser": "5",
     "eslint": "7",
     "eslint-config-prettier": "8",
-    "eslint-plugin-prettier": "3",
+    "eslint-plugin-prettier": "4",
     "husky": "4",
     "nyc": "15",
     "parcel": "next",
@@ -54,14 +55,14 @@
     "tap-nyc": "1",
     "tap-spec": "5",
     "tape": "5",
-    "ts-node": "9",
+    "ts-node": "10",
     "tslib": "2",
     "typedoc": "0",
     "typescript": "4"
   },
   "dependencies": {
-    "@aicacia/iter": "0",
     "@aicacia/hash": "0",
+    "@aicacia/iter": "0",
     "@aicacia/option": "0"
   },
   "peerDependencies": {

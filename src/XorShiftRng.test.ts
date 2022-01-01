@@ -1,4 +1,5 @@
 import * as tape from "tape";
+import { range } from "@aicacia/range";
 import { XorShiftRng } from ".";
 
 tape("XorShiftRng defaults", (assert: tape.Test) => {
@@ -34,5 +35,15 @@ tape("XorShiftRng with fromSeed", (assert: tape.Test) => {
   assert.isEquivalent(rng.nextFloat(), 0.5293325598022587);
   assert.isEquivalent(rng.nextFloat(), 0.327552259586543);
 
+  assert.end();
+});
+
+tape("XorShiftRng fromSeed consistent", (assert: tape.Test) => {
+  for (const _ of range(0, 1000)) {
+    assert.deepEqual(
+      XorShiftRng.fromSeed(1640276295322),
+      XorShiftRng.fromSeed(1640276295322)
+    );
+  }
   assert.end();
 });
