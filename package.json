@@ -1,6 +1,6 @@
 {
   "name": "@aicacia/rand",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "aicacia rand utils",
   "repository": {
     "type": "git",
@@ -21,7 +21,8 @@
     "lint": "eslint . --fix",
     "example": "parcel serve example/index.html",
     "prettier": "prettier --ignore-path ./.eslintignore --ignore-unknown --write .",
-    "preCommit": "npm run prettier && npm run lint && npm run coverage"
+    "preCommit": "npm run prettier && npm run lint && npm run coverage",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
@@ -46,9 +47,9 @@
     "eslint": "8",
     "eslint-config-prettier": "8",
     "eslint-plugin-prettier": "4",
-    "husky": "4",
+    "husky": "8",
     "nyc": "15",
-    "parcel": "next",
+    "parcel": "2",
     "prettier": "2",
     "rollup-plugin-esm-import-to-url": "2",
     "rollup-plugin-terser": "7",

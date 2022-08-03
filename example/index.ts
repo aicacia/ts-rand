@@ -1,4 +1,4 @@
-import { Rng, ParkMillerRng, XorShiftRng, NativeRng } from "../src";
+import { type Rng, ParkMillerRng, XorShiftRng, NativeRng } from "../src";
 
 const SIZE = 512,
   rngs = [
@@ -16,7 +16,7 @@ const SIZE = 512,
 function onLoad() {
   rngs.forEach((rng) => createRngElement(rng.name));
   regenerate();
-  document.getElementById("regenerate").addEventListener("click", regenerate);
+  document.getElementById("regenerate")?.addEventListener("click", regenerate);
 }
 
 function regenerate() {
@@ -36,16 +36,16 @@ function createRngElement(id: string) {
   text.textContent = id;
   element.appendChild(text);
   element.appendChild(canvas);
-  document.getElementById("root").appendChild(element);
+  document.getElementById("root")?.appendChild(element);
 
   return element;
 }
 
 function generateRand(rngCreator: () => Rng) {
   const rng = rngCreator(),
-    element = document.getElementById(rngCreator.name),
+    element = document.getElementById(rngCreator.name) as HTMLElement,
     canvas = element.getElementsByTagName("canvas")[0] as HTMLCanvasElement,
-    ctx = canvas.getContext("2d"),
+    ctx = canvas.getContext("2d") as CanvasRenderingContext2D,
     width = SIZE,
     height = SIZE,
     uniformIntRng = rng.uniformInt(0, 256),
@@ -57,9 +57,10 @@ function generateRand(rngCreator: () => Rng) {
   for (let x = 0; x < width; x++) {
     for (let y = 0; y < height; y++) {
       const pixelindex = (y * width + x) * 4;
-      imagedata.data[pixelindex] = uniformIntRng.nextInt();
-      imagedata.data[pixelindex + 1] = uniformIntRng.nextInt();
-      imagedata.data[pixelindex + 2] = uniformIntRng.nextInt();
+      const color = uniformIntRng.nextInt();
+      imagedata.data[pixelindex] = color;
+      imagedata.data[pixelindex + 1] = color;
+      imagedata.data[pixelindex + 2] = color;
       imagedata.data[pixelindex + 3] = 255;
     }
   }
@@ -67,4 +68,8 @@ function generateRand(rngCreator: () => Rng) {
   ctx.putImageData(imagedata, 0, 0);
 }
 
-window.addEventListener("load", onLoad);
+if (document.readyState === "complete") {
+  onLoad();
+} else {
+  window.addEventListener("load", onLoad);
+}
