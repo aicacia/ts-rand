@@ -39,11 +39,13 @@ tape("XorShiftRng with fromSeed", (assert: tape.Test) => {
 });
 
 tape("XorShiftRng fromSeed consistent", (assert: tape.Test) => {
-  for (const _ of range(0, 1000)) {
-    assert.deepEqual(
-      XorShiftRng.fromSeed(1640276295322),
-      XorShiftRng.fromSeed(1640276295322)
-    );
-  }
+  const [a, b] = range(1, 1000)
+    .iter()
+    .reduce<[number[], number[]]>([[], []], (acc, i) => {
+      acc[0].push(XorShiftRng.fromSeed(i * 164027629532).nextInt());
+      acc[1].push(XorShiftRng.fromSeed(i * 164027629532).nextInt());
+      return acc;
+    });
+  assert.deepEqual(a, b);
   assert.end();
 });
