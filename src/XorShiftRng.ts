@@ -1,7 +1,7 @@
 import { Rng } from "./Rng";
 import { ParkMillerRng } from "./ParkMillerRng";
 
-const RNG = new ParkMillerRng();
+const SET_SEED_RNG = new ParkMillerRng();
 
 export class XorShiftRng extends Rng {
   private x = 0x193a6754;
@@ -19,7 +19,7 @@ export class XorShiftRng extends Rng {
   }
 
   setSeed(seed?: number) {
-    const rng = RNG.setSeed(seed);
+    const rng = SET_SEED_RNG.setSeed(seed);
     return this.set(rng.nextInt(), rng.nextInt(), rng.nextInt(), rng.nextInt());
   }
 
