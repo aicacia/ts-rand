@@ -42,7 +42,7 @@ export abstract class Rng implements Iterator<number>, Iterable<number> {
     return array;
   }
 
-  fromArray<T>(array: T[]): Option<T> {
+  fromArray<T>(array: ReadonlyArray<T>): Option<T> {
     if (array.length) {
       return some(array[this.nextIntInRange(0, array.length - 1)]);
     } else {
