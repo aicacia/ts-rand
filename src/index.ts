@@ -46,19 +46,17 @@ export function shuffle<T>(array: T[]): T[] {
   return DEFAULT_RNG.shuffle(array);
 }
 
-export function fromArray<T>(array: T[]): Option<T> {
+export function fromArray<T>(array: ArrayLike<T>): Option<T> {
   return DEFAULT_RNG.fromArray(array);
 }
 
-export function keyFromObject<K extends string | number | symbol, V>(
-  object: Record<K, V>
-): Option<K> {
+export function keyFromObject<T extends object>(object: T): Option<keyof T> {
   return DEFAULT_RNG.keyFromObject(object);
 }
 
-export function valueFromObject<K extends string | number | symbol, V>(
-  object: Record<K, V>
-): Option<V> {
+export function valueFromObject<T extends object>(
+  object: T
+): Option<T[keyof T]> {
   return DEFAULT_RNG.valueFromObject(object);
 }
 

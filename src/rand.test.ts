@@ -151,6 +151,7 @@ tape("shuffle", (assert: tape.Test) => {
 
 tape("fromArray", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
+
   const array = iter([0, 1, 2, 3, 4, 5]).toArray();
   assert.deepEqual(
     [
@@ -169,14 +170,38 @@ tape("fromArray", (assert: tape.Test) => {
   assert.end();
 });
 
+tape("fromArray const", (assert: tape.Test) => {
+  setDefaultRng(new XorShiftRng());
+  const colors = ["red", "blue", "green"] as const;
+  const color = fromArray(colors);
+  assert.deepEqual(color, some("blue"));
+  assert.end();
+});
+
 tape("keyFromObject", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
-  assert.deepEqual(keyFromObject({ a: 0, b: 1, c: 2 }), some("b"));
+  const key = keyFromObject({ a: 0, b: 1, c: 2 });
+  assert.deepEqual(key, some("b"));
+  assert.end();
+});
+
+tape("keyFromObject const", (assert: tape.Test) => {
+  setDefaultRng(new XorShiftRng());
+  const key = keyFromObject({ a: 0, b: 1, c: 2 } as const);
+  assert.deepEqual(key, some("b"));
   assert.end();
 });
 
 tape("valueFromObject", (assert: tape.Test) => {
   setDefaultRng(new XorShiftRng());
-  assert.deepEqual(valueFromObject({ a: 0, b: 1, c: 2 }), some(1));
+  const value = valueFromObject({ a: 0, b: 1, c: 2 });
+  assert.deepEqual(value, some(1));
+  assert.end();
+});
+
+tape("valueFromObject const", (assert: tape.Test) => {
+  setDefaultRng(new XorShiftRng());
+  const value = valueFromObject({ a: 0, b: 1, c: 2 } as const);
+  assert.deepEqual(value, some(1));
   assert.end();
 });

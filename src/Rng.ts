@@ -42,7 +42,7 @@ export abstract class Rng implements Iterator<number>, Iterable<number> {
     return array;
   }
 
-  fromArray<T>(array: ReadonlyArray<T>): Option<T> {
+  fromArray<T>(array: ArrayLike<T>): Option<T> {
     if (array.length) {
       return some(array[this.nextIntInRange(0, array.length - 1)]);
     } else {
@@ -50,16 +50,12 @@ export abstract class Rng implements Iterator<number>, Iterable<number> {
     }
   }
 
-  keyFromObject<K extends string | number | symbol, V>(
-    object: Record<K, V>
-  ): Option<K> {
-    return this.fromArray(Object.keys(object) as K[]);
+  keyFromObject<T extends object>(object: T): Option<keyof T> {
+    return this.fromArray(Object.keys(object) as Array<keyof T>);
   }
 
-  valueFromObject<K extends string | number | symbol, V>(
-    object: Record<K, V>
-  ): Option<V> {
-    return this.fromArray(Object.values<V>(object));
+  valueFromObject<T extends object>(object: T): Option<T[keyof T]> {
+    return this.fromArray(Object.values(object));
   }
 
   fillBytes<B extends Uint8Array | number[] = Uint8Array | number[]>(
